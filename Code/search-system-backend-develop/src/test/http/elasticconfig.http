@@ -1,0 +1,60 @@
+GET http://localhost:9200/_cat/nodes?v&pretty
+
+###
+PUT http://localhost:9200/_ingest/pipeline/attachment
+Content-Type: application/json
+
+{
+  "description": "Files information",
+  "processors": [
+    {
+      "attachment": {
+        "field": "data"
+      }
+    }
+  ]
+}
+
+###
+PUT http://localhost:9200/fs_index
+Content-Type: application/json
+
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "my_search_analyzer": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+              "lowercase",
+              "search_synonym",
+              "russian_morphology",
+              "english_morphology"
+            ]
+          }
+        },
+        "filter": {
+          "search_synonym": {
+            "ignore_case": "true",
+            "type": "synonym",
+            "synonyms": [
+              "пончо,накидка"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "attachment.content": {
+        "type": "text",
+        "term_vector": "with_positions_offsets",
+        "analyzer": "my_search_analyzer"
+      }
+    }
+  }
+}
+

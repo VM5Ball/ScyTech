@@ -1,0 +1,32 @@
+GET http://localhost:8080/logout
+X-CSRF-TOKEN: 9ae6bb1a-8b7a-41ec-956b-b7702c50a637
+###
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+
+username=user&password=user
+
+###
+GET http://localhost:8080/security/csrfToken/
+###
+GET http://localhost:8080/security/role
+###
+GET  http://localhost:8080/
+X-CSRF-TOKEN: f846187c-5f5c-4219-9bf1-fa7d43b18f00
+
+###
+POST http://localhost:8080/search
+Content-Type: application/json
+
+
+{
+  "query": "\"номером направления\"",
+  "queryFlag": "PHRASE"
+}
+
+
+###
+GET http://localhost:8080/files/domains
+
+
+

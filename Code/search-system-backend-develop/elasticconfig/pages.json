@@ -1,0 +1,40 @@
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "my_search_analyzer": {
+            "type": "custom",
+            "tokenizer": "standard",
+            "filter": [
+              "lowercase",
+              "russian_morphology",
+              "english_morphology",
+              "shingle"
+            ]
+          }
+        },
+        "filter": {
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "attachment.content": {
+        "type": "text",
+        "term_vector": "with_positions_offsets",
+        "analyzer": "my_search_analyzer"
+      },
+      "domain": {
+        "type": "keyword"
+      },
+      "page": {
+        "type": "long"
+      },
+      "filename": {
+        "type": "keyword"
+      }
+    }
+  }
+}

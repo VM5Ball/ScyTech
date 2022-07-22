@@ -1,0 +1,35 @@
+POST http://localhost:8080/search
+Content-Type: application/json
+
+{
+  "query": "\"номером направления\"",
+  "queryFlag": "PHRASE"
+}
+
+###
+GET http://localhost:8080/suggest
+Content-Type: application/json
+
+{
+  "query": "бюдж",
+  "queryFlags": []
+}
+
+###
+POST http://localhost:9200/docs_index/_doc/_search
+Content-Type: application/json
+
+###
+POST http://localhost:9200/docs_index/_doc/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "docName": {
+        "query": "Руководство_пользователя_АРМ__Врач_стационара (1).pdf",
+        "fuzziness": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Files information",
+  "processors": [
+    {
+      "attachment": {
+        "field": "data"
+      }
+    }
+  ]
+}
